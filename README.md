@@ -1,4 +1,13 @@
 # run
+
+## export variables to environment
+```
+export GITHUB_TOKEN=...
+export GITHUB_ORG=...
+export GITHUB_REPOSITORY=...
+```
+
+## run hcl (hashicorp configuration language)
 terraform init
 terraform plan
 terraform apply
