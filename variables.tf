@@ -11,7 +11,7 @@ variable "github_owner" {
   default     = ""
 }
 
-variable "github_repository" {
+variable "github_repo" {
   description = "GitHub repository"
   type        = string
   default     = ""
