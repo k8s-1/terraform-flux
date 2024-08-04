@@ -26,7 +26,10 @@ resource "kind_cluster" "this" {
 }
 
 # ==========================================
-# Initialise a Github project
+# Initialise a Github project - only needed
+if used for e2e tests and you do not have git
+repository already.
+
 # ==========================================
 
 #resource "github_repository" "this" {
