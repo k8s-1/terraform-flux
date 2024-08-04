@@ -41,7 +41,7 @@ resource "kind_cluster" "this" {
 # ==========================================
 
 resource "flux_bootstrap_git" "this" {
-  depends_on = [github_repository.this]
+  # depends_on = [github_repository.this]
 
   path               = "clusters/my-cluster"
 }
