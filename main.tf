@@ -1,26 +1,8 @@
-terraform {
-  required_version = ">= 1.7.0"
-
-  required_providers {
-    flux = {
-      source  = "fluxcd/flux"
-      version = ">= 1.2"
-    }
-    github = {
-      source  = "integrations/github"
-      version = ">= 6.1"
-    }
-    kind = {
-      source  = "tehcyx/kind"
-      version = ">= 0.51"
-    }
-  }
-}
-
 # ==========================================
 # Construct KinD cluster
 # ==========================================
 
+# resource <resource-type> <resource-name>
 resource "kind_cluster" "this" {
   name = "flux-e2e"
 }
