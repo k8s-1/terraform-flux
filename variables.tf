@@ -5,7 +5,7 @@ variable "github_token" {
   default     = ""
 }
 
-variable "github_owner" {
+variable "github_org" {
   description = "GitHub organization"
   type        = string
   default     = ""
