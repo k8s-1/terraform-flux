@@ -27,8 +27,9 @@ resource "kind_cluster" "this" {
 
 # ==========================================
 # Initialise a Github project - only useful
-# if used for e2e tests and you do not have git
-# repository already.
+# if used for e2e tests (unless you want to tf destroy
+# your entire repo every time)
+# Else, initialize the repo via github directly
 
 # ==========================================
 
