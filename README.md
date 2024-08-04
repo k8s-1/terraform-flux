@@ -2,9 +2,11 @@
 terraform init
 terraform plan
 terraform apply
+terraform show
 
 # docs
 https://developer.hashicorp.com/terraform/tutorials?product_intent=terraform
+https://developer.hashicorp.com/terraform/tutorials/configuration-language
 
 # GitHub via SSH
 
