@@ -11,9 +11,9 @@ resource "kind_cluster" "this" {
 # Initialise a Github project
 # ==========================================
 
-resource "github_repository" "this" {
-  name        = var.github_repository
-  description = var.github_repository
+resource "github_repo" "this" {
+  name        = var.github_repo
+  description = var.github_repo
   visibility  = "private"
   auto_init   = true # This is extremely important as flux_bootstrap_git will not work without a repository that has been initialised
 }
@@ -23,7 +23,7 @@ resource "github_repository" "this" {
 # ==========================================
 
 resource "flux_bootstrap_git" "this" {
-  depends_on = [github_repository.this]
+  depends_on = [github_repo.this]
 
   embedded_manifests = true
   path               = "clusters/my-cluster"
