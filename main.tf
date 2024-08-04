@@ -1,31 +1,48 @@
-# creating a cluster with kind of the name "test-cluster" with kubernetes version v1.27.1 and two nodes
+terraform {
+  required_version = ">= 1.7.0"
 
-resource "kind_cluster" "default" {
-    name = "staging"
-    node_image = "kindest/node:v1.30.0"
-    kind_config  {
-        kind = "Cluster"
-        api_version = "kind.x-k8s.io/v1alpha4"
-        node {
-            role = "control-plane"
-        }
-        node {
-            role =  "worker"
-        }
+  required_providers {
+    flux = {
+      source  = "fluxcd/flux"
+      version = ">= 1.2"
     }
+    github = {
+      source  = "integrations/github"
+      version = ">= 6.1"
+    }
+    kind = {
+      source  = "tehcyx/kind"
+      version = ">= 0.4"
+    }
+  }
 }
 
-resource "kind_cluster" "prod" {
-    name = "production"
-    node_image = "kindest/node:v1.30.0"
-    kind_config  {
-        kind = "Cluster"
-        api_version = "kind.x-k8s.io/v1alpha4"
-        node {
-            role = "control-plane"
-        }
-        node {
-            role =  "worker"
-        }
-    }
+# ==========================================
+# Construct KinD cluster
+# ==========================================
+
+resource "kind_cluster" "this" {
+  name = "flux-e2e"
+}
+
+# ==========================================
+# Initialise a Github project
+# ==========================================
+
+resource "github_repository" "this" {
+  name        = var.github_repository
+  description = var.github_repository
+  visibility  = "private"
+  auto_init   = true # This is extremely important as flux_bootstrap_git will not work without a repository that has been initialised
+}
+
+# ==========================================
+# Bootstrap KinD cluster
+# ==========================================
+
+resource "flux_bootstrap_git" "this" {
+  depends_on = [github_repository.this]
+
+  embedded_manifests = true
+  path               = "clusters/my-cluster"
 }
