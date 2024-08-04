@@ -12,7 +12,7 @@ terraform {
     }
     kind = {
       source  = "tehcyx/kind"
-      version = ">= 0.4"
+      version = ">= 0.51"
     }
   }
 }
